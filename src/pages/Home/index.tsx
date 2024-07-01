@@ -7,6 +7,8 @@ export const Home = () => {
   const [number1, setNumber1] = useState<string>("");
   const [number2, setNumber2] = useState<string>("");
   const [result, setResult] = useState<number>(0);
+  const [history, setHistory] = useState<string[]>([]);
+  console.log("🚀 ~ Home ~ history:", history);
 
   const handleChangeNumber1 = (event: ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
@@ -20,28 +22,40 @@ export const Home = () => {
     setNumber2(value);
   };
 
+  const handleAddHistory = (operation: string) => {
+    setHistory([...history, `${number1} ${operation} ${number2}`]);
+  };
+
   const handleAddition = () => {
     const calcResult: number = Number(number1) + Number(number2);
 
     setResult(calcResult);
+    handleAddHistory("+");
   };
 
   const handleSubtraction = () => {
     const calcResult: number = Number(number1) - Number(number2);
 
     setResult(calcResult);
+    handleAddHistory("-");
   };
 
   const handleMultiply = () => {
     const calcResult: number = Number(number1) * Number(number2);
 
     setResult(calcResult);
+    handleAddHistory("*");
   };
 
   const handleDivision = () => {
     const calcResult: number = Number(number1) / Number(number2);
 
     setResult(calcResult);
+    handleAddHistory("/");
+  };
+
+  const handleReset = () => {
+    setHistory([]);
   };
 
   return (
@@ -82,6 +96,26 @@ export const Home = () => {
         <Button onClick={handleMultiply}>Multiplicação</Button>
 
         <Button onClick={handleDivision}>Divisão</Button>
+      </div>
+
+      <div className="history">
+        <div className="title-container">
+          <h2>Histórico:</h2>
+
+          <Button onClick={handleReset}>Reset</Button>
+        </div>
+
+        {history.length === 0 && (
+          <div className="no-history">
+            <span>Nenhum histórico ainda</span>
+          </div>
+        )}
+
+        <ul>
+          {history.map((operation) => (
+            <li key={operation}>{operation}</li>
+          ))}
+        </ul>
       </div>
     </div>
   );

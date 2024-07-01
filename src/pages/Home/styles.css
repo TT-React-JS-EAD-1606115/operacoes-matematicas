@@ -45,3 +45,27 @@
   font-size: 32px;
   margin: auto 1rem;
 }
+
+.history {
+  margin-top: 2rem;
+}
+
+.history ul {
+  list-style: none;
+}
+
+.history ul li {
+  margin-top: 1rem;
+}
+
+.history .title-container {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.history .no-history {
+  margin-top: 1rem;
+  font-style: italic;
+  color: gray;
+}
